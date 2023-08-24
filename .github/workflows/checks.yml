@@ -1,4 +1,4 @@
-name: slash-slack checks
+name: sam-slash-slack checks
 
 on:
   pull_request:

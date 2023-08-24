@@ -1,6 +1,6 @@
 [project]
 name = "sam-slash-slack"
-version = "0.1.1"
+dynamic = ["version"]
 authors = [{ name = "Henry Jones", email = "henryivesjones@gmail.com" }]
 description = "A SAM python framework for slack slash bots."
 readme = "README.md"
@@ -19,6 +19,10 @@ classifiers = [
 dependencies = ["aiohttp", "pydantic", "boto3"]
 
 keywords = ["slack", "lambda", "bot", "slash command", "aws", "sam"]
+
+
+[tool.setuptools.dynamic]
+version = { attr = "sam_slash_slack.__version__" }
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
