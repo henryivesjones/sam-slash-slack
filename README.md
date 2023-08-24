@@ -18,7 +18,7 @@ View [Slack slash command documentation](https://api.slack.com/interactivity/sla
 # Response: 100.0
 import os
 
-from sam_slash_slack import Flag, Float, SlashSlack, String
+from sam_slash_slack import Flag, Float, SAMSlashSlack, String
 
 slash = SAMSlashSlack(signing_secret=os.environ['SLACK_SIGNING_SECRET'])
 api_handler = slash.get_api_handler()
@@ -43,13 +43,13 @@ def math_fn(
 
 # Why use `sam-slash-slack`?
 
-Building a slack slash bot can seem very straightforward at first, however there are some complexities that make it difficult. `slash-slack` handles all of the complexities for you letting you focus on the bot response handlers.
+Building a slack slash bot can seem very straightforward at first, however there are some complexities that make it difficult. `sam-slash-slack` handles all of the complexities for you letting you focus on the bot response handlers.
 
 You don't have to worry about deployment, as you can let SAM and lambda functions do the heavy lifting.
 
 ## Webhook signature verification
 
-`slash-slack` will verify that incoming requests were made by slack by validating the request signature. To disable signature verification use the `dev=True` option when creating the `SlashSlack` object.
+`slash-slack` will verify that incoming requests were made by slack by validating the request signature. To disable signature verification use the `dev=True` option when creating the `SAMSlashSlack` object.
 
 ## Command Response Timeout/Async responses
 
@@ -61,14 +61,14 @@ Often times the action being taken by the bot will depend on external services w
 
 You can optionally add content to the immediate response to let your user know that something is being
 done in the background. A global/default response can be set with the `acknowledge_response` parameter on
-the `SlashSlack` class, or at the command level with the `acknowledge_response` parameter on the `command` decorator.
+the `SAMSlashSlack` class, or at the command level with the `acknowledge_response` parameter on the `command` decorator.
 The value passed to `acknowledge_response` will be passed to `blocks._make_block_message` and can be a `str`, `block`, `list[str]`, or `list[block]`
 where a `block` is a [block kit block](https://api.slack.com/block-kit/building#getting_started).
 See the [example](https://github.com/henryivesjones/slash-slack/blob/main/example.py) for example usage.
 
 ## Input Arg/Flag parsing
 
-`slash-slack` takes care of parsing command input into pre-defined args and flags which let you focus on writing the command function, and not wrangling the content into the format that you need.
+`sam-slash-slack` takes care of parsing command input into pre-defined args and flags which let you focus on writing the command function, and not wrangling the content into the format that you need.
 
 ## Auto-generated help
 
@@ -88,11 +88,11 @@ To request command specific help:
 
 ## Response visibility
 
-Slack slash command responses can be made visible only to the requestor, or to the entire channel. `slash-slack` adds the ability for any command to be made visible with the `--visible` flag.
+Slack slash command responses can be made visible only to the requestor, or to the entire channel. `sam-slash-slack` adds the ability for any command to be made visible with the `--visible` flag.
 
 ## Response formatting
 
-Slack expects responses to be in the Slack Block Kit format. `slash-slack` will automatically convert your string responses into slack `mrkdown` blocks.
+Slack expects responses to be in the Slack Block Kit format. `sam-slash-slack` will automatically convert your string responses into slack `mrkdown` blocks.
 
 # Deployment
 
@@ -107,9 +107,9 @@ sam deploy
 
 # Command Inputs
 
-The inputs and parsing for each command is determined by the parameters to the function. `SlashSlack` parses the function parameters and generates an input schema.
+The inputs and parsing for each command is determined by the parameters to the function. `SAMSlashSlack` parses the function parameters and generates an input schema.
 
-When a request is made to a given command, `SlashSlack` attempts to parse the input text into the command input schema.
+When a request is made to a given command, `SAMSlashSlack` attempts to parse the input text into the command input schema.
 
 ## Flags
 
