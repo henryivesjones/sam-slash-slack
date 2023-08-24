@@ -9,7 +9,7 @@ A python framework for building slack slash bots using AWS SAM. Get input parsin
 
 `sam-slash-slack` utilizes the AWS Serverless Application Model (SAM) to generate serverless resources to run your `sam-slash-slack` bot. The `sam-slash-slack` bot consists of two lambda functions and one SQS queue. The `api_handler` lambda function receives the POST request from slack enqueues the request in the SQS queue for async processing, and immediately responds. Slack requires a response within 3 seconds. This architecture enables your slash commands to take longer than that to respond. The `async_handler` receives messages from the `api_handler` and executes the given command.
 
-Most of the code for `sam-slash-slack` is shared from `slash-slack`.
+Most of the code for `sam-slash-slack` is shared from [`slash-slack`](https://github.com/henryivesjones/slash-slack).
 
 View [Slack slash command documentation](https://api.slack.com/interactivity/slash-commands) here.
 
